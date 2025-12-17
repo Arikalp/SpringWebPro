@@ -11,8 +11,13 @@ import java.sql.SQLOutput;
 public class Greetings
 {
     @RequestMapping("/")
-    @ResponseBody
     public String GreetHomePage(){
         return  "This is the Greeting from the Greetings Class";
+    }
+
+    @RequestMapping("/about")
+    public String About()
+    {
+        return "THis is about page";
     }
 }
