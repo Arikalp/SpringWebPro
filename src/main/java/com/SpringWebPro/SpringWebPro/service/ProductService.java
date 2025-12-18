@@ -16,4 +16,9 @@ public class ProductService {
     {
         return listOfProd;
     }
+
+    public void AddProductsInStore(ProductModel entity) {
+        // Implementation for adding product to the store
+        listOfProd.add(entity);
+    }
 }
