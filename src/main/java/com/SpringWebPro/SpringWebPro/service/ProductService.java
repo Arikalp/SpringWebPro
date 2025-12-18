@@ -1,56 +1,42 @@
 package com.SpringWebPro.SpringWebPro.service;
 
 import com.SpringWebPro.SpringWebPro.models.ProductModel;
+import com.SpringWebPro.SpringWebPro.repository.ProductRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
 
-    List<ProductModel> listOfProd = new ArrayList<>(Arrays.asList(new ProductModel("Oreo",35,1)
-    ,new ProductModel("DarkFantasy",50,2)));
+    @Autowired
+    private ProductRepo productRepo;
 
-    public List<ProductModel> GetProductsInStore()
-    {
-        return listOfProd;
+    public List<ProductModel> GetProductsInStore() {
+        return productRepo.findAll();
     }
 
-    public void AddProductsInStore(ProductModel entity) {
-        // Implementation for adding product to the store
-        listOfProd.add(entity);
+    public ProductModel AddProductsInStore(ProductModel entity) {
+        return productRepo.save(entity);
     }
 
-    public void UpdateProductsInStore(ProductModel entity) {
-        // Implementation for updating product in the store
+    public Optional<ProductModel> getProductById(int prodId) {
+        return productRepo.findById(prodId);
+    }
 
-        boolean flag=false;
-
-        for (int i = 0; i < listOfProd.size(); i++)
-         {
-            if (listOfProd.get(i).getProdId() == entity.getProdId()) {
-                flag=true;
-                listOfProd.set(i, entity);
-                return;
-            }
-        }
-
-        if(!flag) listOfProd.add(entity);
-
+    public ProductModel UpdateProductsInStore(ProductModel entity) {
+        // save() method will update if entity with same ID exists, otherwise insert
+        return productRepo.save(entity);
     }
 
     public void DeleteProductsInStore(int prodId) {
-        // Implementation for deleting product from the store
-        if(listOfProd.removeIf(product -> product.getProdId() == prodId)) {
+        if (productRepo.existsById(prodId)) {
+            productRepo.deleteById(prodId);
             System.out.println("Deleted product with ID: " + prodId);
         } else {
             System.out.println("Product with ID " + prodId + " not found.");
         }
-
-
     }
-
-
 }

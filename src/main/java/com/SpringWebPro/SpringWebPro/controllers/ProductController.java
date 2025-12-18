@@ -26,14 +26,13 @@ public class ProductController {
     }
 
     @PostMapping("/addProducts")
-    public void AddProducts(@RequestBody ProductModel entity) {
-        //TODO: process POST request
-        proMo.AddProductsInStore(entity);
+    public ProductModel AddProducts(@RequestBody ProductModel entity) {
+        return proMo.AddProductsInStore(entity);
     }
     
     @PostMapping("/updateProducts")
-    public void UpdateProducts(@RequestBody ProductModel entity) {
-        proMo.UpdateProductsInStore(entity);
+    public ProductModel UpdateProducts(@RequestBody ProductModel entity) {
+        return proMo.UpdateProductsInStore(entity);
     }
 
     @DeleteMapping("/deleteProducts/{prodId}")
