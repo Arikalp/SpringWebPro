@@ -3,6 +3,10 @@ package com.SpringWebPro.SpringWebPro.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -20,5 +24,14 @@ public class ProductModel {
     private String ProdName;
     
     @Column(name = "product_price")
-    private int ProdPrice;
+    private BigDecimal ProdPrice;
+
+    private String description;
+
+    private String brand;
+
+    private String category;
+
+    private Date releaseDate;
+
 }
