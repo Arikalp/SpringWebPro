@@ -1,0 +1,22 @@
+-- Insert dummy product data for H2 database
+INSERT INTO products (product_name, product_price, description, brand, category, release_date) VALUES
+('iPhone 15 Pro', 999.99, 'Latest Apple flagship smartphone with A17 Pro chip and titanium design', 'Apple', 'Smartphones', '2023-09-22'),
+('Samsung Galaxy S24 Ultra', 1199.99, 'Premium Android smartphone with S Pen and 200MP camera', 'Samsung', 'Smartphones', '2024-01-17'),
+('MacBook Air M2', 1199.00, '13-inch laptop with Apple M2 chip, 8GB RAM, and 256GB SSD', 'Apple', 'Laptops', '2022-07-15'),
+('Dell XPS 15', 1499.99, '15.6-inch laptop with Intel i7, 16GB RAM, and NVIDIA RTX 4050', 'Dell', 'Laptops', '2023-05-10'),
+('Sony WH-1000XM5', 399.99, 'Premium noise-canceling wireless headphones', 'Sony', 'Audio', '2022-05-12'),
+('iPad Pro 12.9', 1099.00, '12.9-inch tablet with M2 chip and Liquid Retina XDR display', 'Apple', 'Tablets', '2022-10-18'),
+('Samsung Galaxy Tab S9', 799.99, '11-inch Android tablet with S Pen included', 'Samsung', 'Tablets', '2023-08-11'),
+('AirPods Pro 2', 249.00, 'Wireless earbuds with active noise cancellation and USB-C charging', 'Apple', 'Audio', '2023-09-22'),
+('Logitech MX Master 3S', 99.99, 'Wireless ergonomic mouse with customizable buttons', 'Logitech', 'Accessories', '2022-05-25'),
+('Apple Watch Series 9', 399.00, 'Smartwatch with fitness tracking and health monitoring', 'Apple', 'Wearables', '2023-09-22'),
+('Samsung Galaxy Watch 6', 299.99, 'Android smartwatch with health sensors and GPS', 'Samsung', 'Wearables', '2023-08-11'),
+('PlayStation 5', 499.99, 'Next-gen gaming console with 4K graphics and fast SSD', 'Sony', 'Gaming', '2020-11-12'),
+('Xbox Series X', 499.99, 'Powerful gaming console with 12 teraflops GPU', 'Microsoft', 'Gaming', '2020-11-10'),
+('Nintendo Switch OLED', 349.99, 'Hybrid gaming console with vibrant OLED screen', 'Nintendo', 'Gaming', '2021-10-08'),
+('Bose QuietComfort 45', 329.00, 'Wireless noise-canceling headphones with 24-hour battery', 'Bose', 'Audio', '2021-09-23'),
+('Canon EOS R6 Mark II', 2499.00, 'Full-frame mirrorless camera with 24.2MP sensor', 'Canon', 'Cameras', '2022-11-03'),
+('GoPro Hero 12 Black', 399.99, 'Action camera with 5.3K video and HyperSmooth stabilization', 'GoPro', 'Cameras', '2023-09-13'),
+('Kindle Paperwhite', 139.99, 'E-reader with 6.8-inch display and adjustable warm light', 'Amazon', 'E-Readers', '2021-10-27'),
+('LG C3 OLED 55"', 1799.99, '55-inch 4K OLED TV with AI processor and gaming features', 'LG', 'TVs', '2023-03-14'),
+('Dyson V15 Detect', 649.99, 'Cordless vacuum with laser dust detection', 'Dyson', 'Home Appliances', '2021-03-24');

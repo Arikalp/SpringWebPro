@@ -1,5 +1,6 @@
 package com.SpringWebPro.SpringWebPro.controllers;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import com.SpringWebPro.SpringWebPro.models.ProductModel;
 import com.SpringWebPro.SpringWebPro.service.ProductService;
@@ -15,28 +16,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
+@RequestMapping("/api")
+@CrossOrigin
 public class ProductController {
 
     @Autowired
-    ProductService proMo;
+    ProductService service;
 
     @GetMapping("/products")
     public List<ProductModel> allProducts(){
-        return proMo.GetProductsInStore();
+        return service.GetProductsInStore();
     }
 
     @PostMapping("/addProducts")
     public ProductModel AddProducts(@RequestBody ProductModel entity) {
-        return proMo.AddProductsInStore(entity);
+        return service.AddProductsInStore(entity);
     }
     
     @PostMapping("/updateProducts")
     public ProductModel UpdateProducts(@RequestBody ProductModel entity) {
-        return proMo.UpdateProductsInStore(entity);
+        return service.UpdateProductsInStore(entity);
     }
 
     @DeleteMapping("/deleteProducts/{prodId}")
     public void DeleteProducts(@PathVariable int prodId) {
-        proMo.DeleteProductsInStore(prodId);
+        service.DeleteProductsInStore(prodId);
     }
 }

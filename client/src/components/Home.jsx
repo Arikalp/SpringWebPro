@@ -34,7 +34,7 @@ const Home = () => {
         {products.map((product) => (
           <div
             className="card mb-3"
-            key={product.id}
+            key={product.prodId}
             style={{
               width: "270px",
               height: "210px",
@@ -63,7 +63,7 @@ const Home = () => {
                   className="card-title"
                   style={{ margin: "0 0 10px 0", fontSize: "1.2rem" }}
                 >
-                  {product.name.toUpperCase()}
+                  {product.prodName.toUpperCase()}
                 </h5>
                 <i
                   className="card-brand"
@@ -83,7 +83,7 @@ const Home = () => {
                   }}
                 >
                   <i className="bi bi-currency-rupee"></i>
-                  {product.price}
+                  {product.prodPrice}
                 </h5>
               </div>
               <button
