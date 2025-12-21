@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+import javax.swing.text.html.parser.Entity;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @RestController
@@ -29,8 +33,14 @@ public class ProductController {
     }
 
     @PostMapping("/addProducts")
-    public ProductModel AddProducts(@RequestBody ProductModel entity) {
-        return service.AddProductsInStore(entity);
+    public ResponseEntity<?> AddProducts(@RequestPart ProductModel productModel, @RequestPart("imageFile") MultipartFile imageFile) {
+
+        try {
+            return service.AddProductsInStore(productModel, imageFile);
+            } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println("Error while adding product: " + e.getMessage() );
+        }
     }
     
     @PostMapping("/updateProducts")
