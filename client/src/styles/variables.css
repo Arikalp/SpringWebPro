@@ -1,0 +1,53 @@
+/* Theme Variables */
+
+.light-theme{
+  --root_background: #f8f9fa;
+  --body_background: #f8f9fa;
+  --navbar_background: #ffffff;
+  --navbar_text: #1a1a1a;
+  --body_color: #ffffff;
+  --link_color: #1a1a1a;
+  --link_hover_color: #4a90e2;
+  --link_visited_color: #4a90e2;
+  --para-clr: #2c3e50;
+  --cart_body_color: #ffffff;
+  --quantity-clr: #2c3e50;
+  --button-clr: #4a90e2;
+  --card-bg-clr: #ffffff;
+  --btn-bg: #4a90e2;
+  --btn-clr: #ffffff;
+  --category-hvr: #e8f4f8;
+  --search_result-bg: #ffffff;
+  --hr_line_card: #e1e8ed;
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+  --border-radius: 12px;
+  --accent-color: #4a90e2;
+}
+
+.dark-theme{
+  --root_background: #0f0f0f;
+  --body_background: #0f0f0f;
+  --navbar_background: #1a1a1a;
+  --navbar_text: #e1e8ed;
+  --body_color: #1a1a1a;
+  --link_color: #e1e8ed;
+  --link_hover_color: #6ba4f2;
+  --link_visited_color: #6ba4f2;
+  --para-clr: #e1e8ed;
+  --cart_body_color: #1a1a1a;
+  --quantity-clr: #e1e8ed;
+  --button-clr: #6ba4f2;
+  --card-bg-clr: #1a1a1a;
+  --btn-bg: #6ba4f2;
+  --btn-clr: #ffffff;
+  --category-hvr: #2a2a2a;
+  --search_result-bg: #1a1a1a;
+  --hr_line_card: #2a2a2a;
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.4);
+  --border-radius: 12px;
+  --accent-color: #6ba4f2;
+}

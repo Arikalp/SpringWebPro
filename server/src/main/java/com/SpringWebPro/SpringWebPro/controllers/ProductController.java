@@ -32,6 +32,11 @@ public class ProductController {
         return service.GetProductsInStore();
     }
 
+    @GetMapping("/products/{id}")
+    public ProductModel getProductById(@PathVariable int id) {
+        return service.getProductById(id).orElse(null);
+    }
+
     @PostMapping("/addProducts")
     public ResponseEntity<?> AddProducts(@RequestPart ProductModel productModel, @RequestPart("imageFile") MultipartFile imageFile) {
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Home from "./Home";
 import axios from "axios";
+import "./Navbar.css";
 
 const Navbar = ({ onSelectCategory, onSearch }) => {
   const getInitialTheme = () => {
@@ -75,23 +76,16 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
                   <i className="bi bi-sun-fill"></i>
                 )}
               </button>
-              <div className="d-flex align-items-center cart">
-                {/* <a href="/cart" className="nav-link text-dark"> */}
-                <i
-                  className="bi bi-cart me-2"
-                  style={{ display: "flex", alignItems: "center" }}
-                >
-                  Cart
-                </i>
-                {/* </a> */}
-
+              <div className="d-flex align-items-center cart gap-3">
                 <input
-                  className="form-control me-2"
+                  className="search-input"
                   type="search"
-                  placeholder="Search"
+                  placeholder="Search products..."
                   aria-label="Search"
                 />
-                <div />
+                <a href="/cart" className="cart-link">
+                  <i className="bi bi-cart3" style={{ fontSize: "1.25rem" }}></i>
+                </a>
               </div>
             </div>
           </div>

@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./Home.css";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [isError, setIsError] = useState(false);
+  const navigate = useNavigate();
+
+  const handleProductClick = (productId) => {
+    navigate(`/product/${productId}`);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,73 +40,31 @@ const Home = () => {
       <div className="grid">
         {products.map((product) => (
           <div
-            className="card mb-3"
+            className="product-card-modern"
             key={product.prodId}
-            style={{
-              width: "270px",
-              height: "320px",
-              boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-              borderRadius: "10px",
-              overflow: "hidden",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-start",
-              alignItems: "stretch",
-            }}
+            onClick={() => handleProductClick(product.prodId)}
           >
-            <img
-              src={product.imageUrl || "https://via.placeholder.com/270x150?text=No+Image"}
-              alt={product.prodName}
-              style={{
-                width: "100%",
-                height: "150px",
-                objectFit: "cover"
-              }}
-            />
-            <div
-              className="card-body"
-              style={{
-                flexGrow: 1,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                padding: "10px",
-              }}
-            >
-              <div>
-                <h5
-                  className="card-title"
-                  style={{ margin: "0 0 10px 0", fontSize: "1.2rem" }}
-                >
-                  {product.prodName.toUpperCase()}
-                </h5>
-                <i
-                  className="card-brand"
-                  style={{ fontStyle: "italic", fontSize: "0.8rem" }}
-                >
-                  {"by " + product.brand}
-                </i>
+            <div className="product-image-container">
+              <img
+                src={product.imageUrl || "https://via.placeholder.com/300x200?text=No+Image"}
+                alt={product.prodName}
+                className="product-image"
+              />
+            </div>
+            <div className="product-content">
+              <div className="product-header">
+                <h5 className="product-title">{product.prodName}</h5>
+                <span className="product-brand">{product.brand}</span>
               </div>
-              <hr className="hr-line" style={{ margin: "10px 0" }} />
-              <div className="home-cart-price">
-                <h5
-                  className="card-text"
-                  style={{
-                    fontWeight: "600",
-                    fontSize: "1.1rem",
-                    marginBottom: "5px",
-                  }}
-                >
+              <div className="product-footer">
+                <h5 className="product-price">
                   <i className="bi bi-currency-rupee"></i>
                   {product.prodPrice}
                 </h5>
+                <button className="btn-add-cart" onClick={(e) => { e.stopPropagation(); }}>
+                  <i className="bi bi-cart-plus"></i> Add
+                </button>
               </div>
-              <button
-                className="btn-hover color-9"
-                style={{ margin: "10px 25px 0px " }}
-              >
-                Add To Cart
-              </button>
             </div>
           </div>
         ))}
