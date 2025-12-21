@@ -37,17 +37,25 @@ const Home = () => {
             key={product.prodId}
             style={{
               width: "270px",
-              height: "210px",
+              height: "320px",
               boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
               borderRadius: "10px",
               overflow: "hidden",
-
               display: "flex",
               flexDirection: "column",
               justifyContent: "flex-start",
               alignItems: "stretch",
             }}
           >
+            <img
+              src={product.imageUrl || "https://via.placeholder.com/270x150?text=No+Image"}
+              alt={product.prodName}
+              style={{
+                width: "100%",
+                height: "150px",
+                objectFit: "cover"
+              }}
+            />
             <div
               className="card-body"
               style={{

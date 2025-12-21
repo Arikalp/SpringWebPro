@@ -1177,3 +1177,229 @@ font-size: 14px;
   height: 1px;
   background: var(--hr_line_card)
 }
+/* <................................Add Product Page Styles..................> */
+.add-product-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 3rem;
+  background-color: var(--root_background);
+}
+
+.add-product-header {
+  margin-bottom: 2rem;
+  padding-left: 0.5rem;
+}
+
+.add-product-header h2 {
+  color: var(--para-clr);
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.add-product-header .text-muted {
+  color: var(--para-clr);
+  opacity: 0.7;
+  font-size: 1rem;
+}
+
+.add-product-content {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 2rem;
+}
+
+.add-product-form-section {
+  background-color: var(--card-bg-clr);
+  border-radius: 8px;
+}
+
+.add-product-form-section .card {
+  border: none;
+  border-radius: 8px;
+  background-color: var(--card-bg-clr);
+}
+
+.add-product-form-section .card-body {
+  padding: 2rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group-half {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group-half .form-label {
+  color: var(--para-clr);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.form-group-half .form-control {
+  background-color: var(--body_background);
+  color: var(--para-clr);
+  border: 1px solid var(--category-hvr);
+  padding: 0.75rem;
+  border-radius: 6px;
+}
+
+.form-group-half .form-control:focus {
+  background-color: var(--body_background);
+  color: var(--para-clr);
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.add-product-form-section .mb-3 {
+  margin-bottom: 1.5rem;
+}
+
+.add-product-form-section .form-label {
+  color: var(--para-clr);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.add-product-form-section .form-control,
+.add-product-form-section textarea.form-control {
+  background-color: var(--body_background);
+  color: var(--para-clr);
+  border: 1px solid var(--category-hvr);
+  padding: 0.75rem;
+  border-radius: 6px;
+}
+
+.add-product-form-section .form-control:focus,
+.add-product-form-section textarea.form-control:focus {
+  background-color: var(--body_background);
+  color: var(--para-clr);
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn-submit {
+  flex: 1;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.btn-reset {
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  border-radius: 6px;
+  background-color: var(--category-hvr);
+  color: var(--para-clr);
+  border: none;
+}
+
+.btn-reset:hover {
+  opacity: 0.8;
+}
+
+.add-product-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.info-card {
+  background-color: var(--card-bg-clr);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.info-card h4 {
+  color: var(--para-clr);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.info-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-card ul li {
+  color: var(--para-clr);
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.info-card ul li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #28a745;
+  font-weight: bold;
+}
+
+.image-preview img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .add-product-content {
+    grid-template-columns: 1fr 350px;
+  }
+}
+
+@media (max-width: 992px) {
+  .add-product-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .add-product-info-section {
+    flex-direction: row;
+  }
+  
+  .info-card {
+    flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .add-product-container {
+    padding: 1.5rem 1rem;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .add-product-info-section {
+    flex-direction: column;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .btn-submit,
+  .btn-reset {
+    width: 100%;
+  }
+}
