@@ -9,6 +9,8 @@ const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(0);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -28,11 +30,10 @@ const ProductDetails = () => {
 
   if (loading) {
     return (
-      <div className="container mt-4">
-        <div className="text-center">
-          <div className="spinner-border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
+      <div className="product-details-page">
+        <div className="loading-container">
+          <div className="spinner"></div>
+          <p>Loading product details...</p>
         </div>
       </div>
     );
@@ -40,123 +41,229 @@ const ProductDetails = () => {
 
   if (error || !product) {
     return (
-      <div className="container mt-4">
-        <div className="alert alert-danger text-center">
-          Product not found or error loading product details.
+      <div className="product-details-page">
+        <div className="error-container">
+          <i className="bi bi-exclamation-circle"></i>
+          <h3>Product not found</h3>
+          <p>Sorry, we couldn't find the product you're looking for.</p>
+          <button className="btn-back" onClick={() => navigate(-1)}>
+            Go Back
+          </button>
         </div>
       </div>
     );
   }
 
+  // For demo purposes, using the same image multiple times
+  const productImages = [
+    product.imageUrl || "https://via.placeholder.com/600x600?text=No+Image",
+    product.imageUrl || "https://via.placeholder.com/600x600?text=No+Image",
+    product.imageUrl || "https://via.placeholder.com/600x600?text=No+Image",
+  ];
+
+  const handleQuantityChange = (type) => {
+    if (type === 'increment') {
+      setQuantity(prev => prev + 1);
+    } else if (type === 'decrement' && quantity > 1) {
+      setQuantity(prev => prev - 1);
+    }
+  };
+
   return (
-    <div className="container mt-4">
-      <button 
-        className="btn btn-outline-secondary mb-3"
-        onClick={() => navigate(-1)}
-      >
-        ← Back
-      </button>
-      
-      <div className="row">
-        <div className="col-md-6">
-          <div className="product-image-container">
-            <img
-              src={product.imageUrl || "https://via.placeholder.com/500x400?text=No+Image"}
+    <div className="product-details-page">
+      {/* Breadcrumb Navigation */}
+      <div className="breadcrumb-container">
+        <div className="breadcrumb">
+          <span onClick={() => navigate('/')} className="breadcrumb-link">Home</span>
+          <i className="bi bi-chevron-right"></i>
+          <span onClick={() => navigate('/')} className="breadcrumb-link">{product.category}</span>
+          <i className="bi bi-chevron-right"></i>
+          <span className="breadcrumb-current">{product.prodName}</span>
+        </div>
+      </div>
+
+      {/* Main Product Section */}
+      <div className="product-container">
+        {/* Left: Image Gallery */}
+        <div className="product-gallery">
+          <div className="main-image-container">
+            <img 
+              src={productImages[selectedImage]} 
               alt={product.prodName}
-              className="img-fluid rounded shadow"
-              style={{ width: "100%", maxHeight: "400px", objectFit: "cover" }}
+              className="main-product-image"
             />
           </div>
+          <div className="thumbnail-container">
+            {productImages.map((img, index) => (
+              <div 
+                key={index}
+                className={`thumbnail ${selectedImage === index ? 'active' : ''}`}
+                onClick={() => setSelectedImage(index)}
+              >
+                <img src={img} alt={`${product.prodName} ${index + 1}`} />
+              </div>
+            ))}
+          </div>
+          
+          {/* Action Buttons Below Image */}
+          <div className="image-action-buttons">
+            <button className="action-btn">
+              <i className="bi bi-cart-plus"></i>
+              ADD TO CART
+            </button>
+            <button className="action-btn secondary">
+              <i className="bi bi-lightning-fill"></i>
+              BUY NOW
+            </button>
+          </div>
         </div>
-        
-        <div className="col-md-6">
-          <div className="product-details">
-            <h1 className="product-title">{product.prodName}</h1>
-            <p className="text-muted mb-2">by {product.brand}</p>
-            
-            <div className="price-section mb-3">
-              <h2 className="text-success mb-0">
-                <i className="bi bi-currency-rupee"></i>{product.prodPrice}
-              </h2>
+
+        {/* Right: Product Details */}
+        <div className="product-info-section">
+          {/* Product Title & Brand */}
+          <div className="product-header">
+            <h1 className="product-name">{product.prodName}</h1>
+            <p className="product-brand">Brand: <span>{product.brand}</span></p>
+          </div>
+
+          {/* Rating Section */}
+          <div className="rating-section">
+            <div className="rating-badge">
+              4.5 <i className="bi bi-star-fill"></i>
             </div>
-            
-            <div className="product-info mb-4">
-              <div className="info-item mb-2">
-                <strong>Category:</strong> {product.category}
+            <span className="rating-count">2,345 Ratings & 456 Reviews</span>
+          </div>
+
+          {/* Price Section */}
+          <div className="price-section">
+            <div className="price-main">
+              <i className="bi bi-currency-rupee"></i>{product.prodPrice}
+            </div>
+            <div className="price-original">
+              <i className="bi bi-currency-rupee"></i>{(product.prodPrice * 1.3).toFixed(2)}
+            </div>
+            <div className="price-discount">23% off</div>
+          </div>
+
+          {/* Available Offers */}
+          <div className="offers-section">
+            <h3>Available Offers</h3>
+            <div className="offer-item">
+              <i className="bi bi-tag-fill"></i>
+              <div>
+                <strong>Bank Offer:</strong> 10% instant discount on SBI Credit Cards
               </div>
-              <div className="info-item mb-2">
-                <strong>Brand:</strong> {product.brand}
+            </div>
+            <div className="offer-item">
+              <i className="bi bi-tag-fill"></i>
+              <div>
+                <strong>Special Price:</strong> Get extra 5% off (price inclusive of discount)
               </div>
+            </div>
+            <div className="offer-item">
+              <i className="bi bi-tag-fill"></i>
+              <div>
+                <strong>Partner Offer:</strong> Sign-up for Pay Later & get free gift voucher
+              </div>
+            </div>
+          </div>
+
+          {/* Quantity Selector */}
+          <div className="quantity-section">
+            <h3>Quantity</h3>
+            <div className="quantity-controls">
+              <button onClick={() => handleQuantityChange('decrement')}>-</button>
+              <span>{quantity}</span>
+              <button onClick={() => handleQuantityChange('increment')}>+</button>
+            </div>
+          </div>
+
+          {/* Delivery Info */}
+          <div className="delivery-section">
+            <h3>Delivery</h3>
+            <div className="delivery-input">
+              <input type="text" placeholder="Enter pincode" />
+              <button>Check</button>
+            </div>
+            <div className="delivery-info">
+              <i className="bi bi-truck"></i>
+              <span>Free delivery on orders above ₹500</span>
+            </div>
+          </div>
+
+          {/* Product Highlights */}
+          <div className="highlights-section">
+            <h3>Product Highlights</h3>
+            <ul>
+              <li>Category: {product.category}</li>
+              <li>Brand: {product.brand}</li>
+              <li>100% Original Products</li>
+              <li>Easy 7 days return policy</li>
               {product.releaseDate && (
-                <div className="info-item mb-2">
-                  <strong>Release Date:</strong> {new Date(product.releaseDate).toLocaleDateString()}
-                </div>
+                <li>Release Date: {new Date(product.releaseDate).toLocaleDateString()}</li>
               )}
-            </div>
-            
-            {product.description && (
-              <div className="description-section mb-4">
-                <h4>Description</h4>
-                <p className="text-muted">{product.description}</p>
-              </div>
-            )}
-            
-            <div className="action-buttons">
-              <button className="btn btn-primary btn-lg me-3">
-                <i className="bi bi-cart-plus"></i> Add to Cart
-              </button>
-              <button className="btn btn-outline-danger btn-lg">
-                <i className="bi bi-heart"></i> Wishlist
-              </button>
-            </div>
+            </ul>
           </div>
         </div>
       </div>
-      
-      <div className="row mt-5">
-        <div className="col-12">
-          <div className="card">
-            <div className="card-header">
-              <h4>Product Specifications</h4>
-            </div>
-            <div className="card-body">
-              <div className="row">
-                <div className="col-md-6">
-                  <table className="table table-borderless">
-                    <tbody>
-                      <tr>
-                        <td><strong>Product ID:</strong></td>
-                        <td>{product.prodId}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Brand:</strong></td>
-                        <td>{product.brand}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Category:</strong></td>
-                        <td>{product.category}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div className="col-md-6">
-                  <table className="table table-borderless">
-                    <tbody>
-                      <tr>
-                        <td><strong>Price:</strong></td>
-                        <td>₹{product.prodPrice}</td>
-                      </tr>
-                      {product.releaseDate && (
-                        <tr>
-                          <td><strong>Release Date:</strong></td>
-                          <td>{new Date(product.releaseDate).toLocaleDateString()}</td>
-                        </tr>
-                      )}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+
+      {/* Description & Specifications */}
+      <div className="product-details-tabs">
+        <div className="tabs-container">
+          <div className="tab active">Description</div>
+          <div className="tab">Specifications</div>
+          <div className="tab">Reviews</div>
+        </div>
+
+        <div className="tab-content">
+          {/* Description */}
+          <div className="description-content">
+            <h2>Product Description</h2>
+            <p>{product.description || "Experience premium quality with this exceptional product. Designed with precision and care, it offers unmatched performance and durability. Perfect for your daily needs."}</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+              <li>High-quality materials ensuring long-lasting durability</li>
+              <li>Sleek and modern design that fits any style</li>
+              <li>Easy to use with user-friendly interface</li>
+              <li>Backed by manufacturer warranty</li>
+              <li>Eco-friendly and sustainable production</li>
+            </ul>
+          </div>
+
+          {/* Specifications */}
+          <div className="specifications-content">
+            <h2>Specifications</h2>
+            <table className="specs-table">
+              <tbody>
+                <tr>
+                  <td className="spec-label">Product ID</td>
+                  <td className="spec-value">{product.prodId}</td>
+                </tr>
+                <tr>
+                  <td className="spec-label">Product Name</td>
+                  <td className="spec-value">{product.prodName}</td>
+                </tr>
+                <tr>
+                  <td className="spec-label">Brand</td>
+                  <td className="spec-value">{product.brand}</td>
+                </tr>
+                <tr>
+                  <td className="spec-label">Category</td>
+                  <td className="spec-value">{product.category}</td>
+                </tr>
+                <tr>
+                  <td className="spec-label">Price</td>
+                  <td className="spec-value">₹{product.prodPrice}</td>
+                </tr>
+                {product.releaseDate && (
+                  <tr>
+                    <td className="spec-label">Release Date</td>
+                    <td className="spec-value">{new Date(product.releaseDate).toLocaleDateString()}</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
