@@ -57,4 +57,9 @@ public class ProductController {
     public void DeleteProducts(@PathVariable int prodId) {
         service.DeleteProductsInStore(prodId);
     }
+
+    @PostMapping("/searchProducts")
+    public List<ProductModel> SearchProducts(@RequestBody String prodName) {
+        return service.SearchProductsInStore(prodName);
+    }
 }

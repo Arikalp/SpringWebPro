@@ -55,4 +55,8 @@ public class ProductService {
             System.out.println("Product with ID " + prodId + " not found.");
         }
     }
+
+    public List<ProductModel> SearchProductsInStore(String prodName) {
+        return productRepo.findByProdNameContainingIgnoreCase(prodName);
+    }
 }
