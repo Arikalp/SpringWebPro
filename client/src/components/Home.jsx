@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Home.css";
 
-const Home = () => {
+const Home = ({ searchResults }) => {
   const [products, setProducts] = useState([]);
   const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
+
+  const displayProducts = searchResults.length > 0 ? searchResults : products;
 
   const handleProductClick = (productId) => {
     navigate(`/product/${productId}`);
@@ -38,7 +40,7 @@ const Home = () => {
   return (
     <>
       <div className="grid">
-        {products.map((product) => (
+        {displayProducts.map((product) => (
           <div
             className="product-card-modern"
             key={product.prodId}

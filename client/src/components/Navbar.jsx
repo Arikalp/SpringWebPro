@@ -1,9 +1,27 @@
 import React, { useEffect, useState } from "react";
-import Home from "./Home";
 import axios from "axios";
 import "./Navbar.css";
 
-const Navbar = ({ onSelectCategory, onSearch }) => {
+const Navbar = ({ onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const handleSearch = async (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    
+    if (value.trim() === "") {
+      onSearch([]);
+      return;
+    }
+
+    try {
+      const response = await axios.get(`http://localhost:8080/api/products/search?keyword=${value}`);
+      onSearch(response.data);
+    } catch (error) {
+      console.error("Error searching products:", error);
+      onSearch([]);
+    }
+  };
+
   const getInitialTheme = () => {
     const storedTheme = localStorage.getItem("theme");
     return storedTheme ? storedTheme : "light-theme";
@@ -82,6 +100,8 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
                   type="search"
                   placeholder="Search products..."
                   aria-label="Search"
+                  value={searchTerm}
+                  onChange={handleSearch}
                 />
                 <a href="/cart" className="cart-link">
                   <i className="bi bi-cart3" style={{ fontSize: "1.25rem" }}></i>

@@ -1,7 +1,7 @@
 import "./styles/variables.css";
 import "./styles/global.css";
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import AddProduct from "./components/AddProduct";
@@ -10,11 +10,17 @@ import Footer from "./components/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearch = (results) => {
+    setSearchResults(results);
+  };
+
   return (
       <BrowserRouter>
-        <Navbar />
+        <Navbar onSearch={handleSearch} />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home searchResults={searchResults} />} />
           <Route path="/add_product" element={<AddProduct />} />
           <Route path="/product/:id" element={<ProductDetails />} />
         </Routes>

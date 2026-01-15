@@ -39,4 +39,8 @@ public class ProductService {
             System.out.println("Product with ID " + prodId + " not found.");
         }
     }
+
+    public List<ProductModel> searchProducts(String keyword) {
+        return productRepo.findByProdNameContainingIgnoreCase(keyword);
+    }
 }
