@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
-import javax.swing.text.html.parser.Entity;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -38,14 +35,8 @@ public class ProductController {
     }
 
     @PostMapping("/addProducts")
-    public ResponseEntity<?> AddProducts(@RequestPart ProductModel productModel, @RequestPart("imageFile") MultipartFile imageFile) {
-
-        try {
-            return service.AddProductsInStore(productModel, imageFile);
-            } catch (Exception e) {
-            // TODO: handle exception
-            System.out.println("Error while adding product: " + e.getMessage() );
-        }
+    public ProductModel AddProducts(@RequestBody ProductModel productModel) {
+        return service.AddProductsInStore(productModel);
     }
     
     @PostMapping("/updateProducts")
@@ -56,10 +47,5 @@ public class ProductController {
     @DeleteMapping("/deleteProducts/{prodId}")
     public void DeleteProducts(@PathVariable int prodId) {
         service.DeleteProductsInStore(prodId);
-    }
-
-    @PostMapping("/searchProducts")
-    public List<ProductModel> SearchProducts(@RequestBody String prodName) {
-        return service.SearchProductsInStore(prodName);
     }
 }

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.io.IOException;
 
 @Service
 public class ProductService {
@@ -19,23 +18,8 @@ public class ProductService {
         return productRepo.findAll();
     }
 
-    public ProductModel AddProductsInStore(ProductModel Product, MultipartFile imageFile){
-
-        // ProductModel entity = new ProductModel();
-        // entity.setProdName(Prodcut.getProdName());
-        // entity.setProdPrice(Prodcut.getProdPrice());
-        // entity.setDescription(Prodcut.getDescription());
-        // entity.setBrand(Prodcut.getBrand());
-        // entity.setCategory(Prodcut.getCategory());
-        // entity.setReleaseDate(Prodcut.getReleaseDate());
-        entity.setImageName(imageFile.getOriginalFilename());
-        entity.setImageType(imageFile.getContentType());
-        try {
-            entity.setImageData(imageFile.getBytes());
-        } catch (IOException e) {
-           e.printStackTrace();
-        }
-        return productRepo.save(Product);
+    public ProductModel AddProductsInStore(ProductModel product){
+        return productRepo.save(product);
     }
 
     public Optional<ProductModel> getProductById(int prodId) {
@@ -54,9 +38,5 @@ public class ProductService {
         } else {
             System.out.println("Product with ID " + prodId + " not found.");
         }
-    }
-
-    public List<ProductModel> SearchProductsInStore(String prodName) {
-        return productRepo.findByProdNameContainingIgnoreCase(prodName);
     }
 }
