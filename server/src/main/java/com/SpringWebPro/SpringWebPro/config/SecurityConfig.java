@@ -36,13 +36,23 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(User.builder().username("user").password(passwordEncoder().encode("password")).roles("USER").build());
     }
 
+    // @Bean
+    // public AuthenicationProvider authenticationProvider(){
+    //     DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+    //     provider.setUserDetailsService(userDetailsService());
+    //     provider.setPasswordEncoder(passwordEncoder());
+    //     return provider;
+    // }
+
     @Bean
-    public AuthenicationProvider authenticationProvider(){
+    public AuthenicationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setPasswordEncoder(new BCryptPasswordEncoder(12));
         provider.setUserDetailsService(userDetailsService());
-        provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
+
+    
 }
 
 
