@@ -1,18 +1,27 @@
+package com.SpringWebPro.SpringWebPro.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import com.SpringWebPro.SpringWebPro.models.UserPrincipal;
+import com.SpringWebPro.SpringWebPro.models.Users;
+import com.SpringWebPro.SpringWebPro.repository.UserRepo;
 
 @Service
-public class MyUserDetailsService {
+public class MyUserDetailsService implements UserDetailsService {
+    
     @Autowired
     private UserRepo repo;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = repo.findByUsername(username);
+        Users user = repo.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("User 404");
         }
-        return new MyUserDetails(user);
+        return new UserPrincipal(user);
     }
-
 }

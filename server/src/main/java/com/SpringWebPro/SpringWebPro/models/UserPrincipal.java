@@ -1,10 +1,17 @@
+package com.SpringWebPro.SpringWebPro.models;
+
+import java.util.Collection;
 import java.util.Collections;
 
-public class UserPrincipal implements UserDetails{
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-    private User user;
+public class UserPrincipal implements UserDetails {
 
-    public UserPrincipal(User user) {
+    private Users user;
+
+    public UserPrincipal(Users user) {
         this.user = user;
     }
     
@@ -15,17 +22,17 @@ public class UserPrincipal implements UserDetails{
 
     @Override
     public String getPassword() {
-        return null;
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return user.getUsername();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
@@ -35,11 +42,11 @@ public class UserPrincipal implements UserDetails{
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

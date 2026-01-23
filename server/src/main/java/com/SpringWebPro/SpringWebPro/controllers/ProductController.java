@@ -54,4 +54,10 @@ public class ProductController {
     public List<ProductModel> searchProducts(@RequestParam String keyword) {
         return service.searchProducts(keyword);
     }
+
+    @PostMapping("/login")
+    public String login(@RequestBody ProductModel user) {
+        // Add your login logic here
+        return "Login successful";
+    }   
 }

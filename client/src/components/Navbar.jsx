@@ -1,9 +1,32 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Navbar.css";
 
 const Navbar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user is logged in
+    const token = localStorage.getItem("token");
+    const storedUsername = localStorage.getItem("username");
+    if (token) {
+      setIsLoggedIn(true);
+      setUsername(storedUsername || "User");
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    setIsLoggedIn(false);
+    setUsername("");
+    navigate("/login");
+  };
+
   const handleSearch = async (e) => {
     const value = e.target.value;
     setSearchTerm(value);
@@ -106,6 +129,24 @@ const Navbar = ({ onSearch }) => {
                 <a href="/cart" className="cart-link">
                   <i className="bi bi-cart3" style={{ fontSize: "1.25rem" }}></i>
                 </a>
+                
+                {isLoggedIn ? (
+                  <div className="user-menu d-flex align-items-center gap-2">
+                    <span className="username-display">Hi, {username}</span>
+                    <button className="btn btn-sm btn-outline-danger" onClick={handleLogout}>
+                      Logout
+                    </button>
+                  </div>
+                ) : (
+                  <div className="auth-buttons d-flex gap-2">
+                    <a href="/login" className="btn btn-sm btn-outline-primary">
+                      Login
+                    </a>
+                    <a href="/signup" className="btn btn-sm btn-primary">
+                      Sign Up
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           </div>
